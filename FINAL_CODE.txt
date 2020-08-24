@@ -113,9 +113,7 @@ end
 else if(flag==2'b10)
 begin
 control=4'b1101;
-	
 case (count)
-	
 4'd0:display1=8'b11111100;
 4'd1:display1=8'b11111100;
 4'd2:display1=8'b11111100;
@@ -137,10 +135,8 @@ end
 
 
 else
-	
 begin
 control=4'b1110;
-
 case (count)
 4'd0:display1=8'b11111100;
 4'd1:display1=8'b11111100;
