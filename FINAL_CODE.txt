@@ -1,0 +1,238 @@
+module display_count(sensor,display1,control,reset,clk,count);
+input [1:0]sensor;
+input clk,reset;
+output [3:0] count;
+output [7:0] display1;
+output [3:0] control;
+reg [3:0] control;
+reg [7:0] display1;
+reg [3:0] count;
+integer temp,temp2;
+reg clkdiv,clkms;
+reg [1:0]flag;
+
+
+//Initialize the variables
+initial
+begin
+temp=0;
+
+temp2=0;
+count=4'b0000;
+clkdiv=1'b0;
+
+clkms=0;
+
+flag=2'b00;
+end
+
+
+//Generation of clock signal with perid as one second
+always@(posedge clk)//4MHZ CLOCK FREQUENCY
+begin
+temp=temp+1
+;
+temp2=temp2+1;
+if (temp==2000000)
+begin
+clkdiv=~clkdiv;
+temp=0;
+end
+
+if(temp2==2000)
+
+begin
+
+clkms=~clkms;
+
+temp2=0;
+
+end
+end
+
+//maincode for count
+always@(posedge clkdiv)
+begin
+if(reset==1'b1)
+count=1'b0;
+else
+begin
+case(sensor[1:0])
+  2'b10:
+  count=count+1;
+        
+  2'b01: count=count-1;
+endcase	
+end
+ 
+end     
+	
+end
+
+always@(posedge clkms)
+
+begin
+	
+if(flag==2'b00)
+ begin		
+control=4'b0111;
+case (count)
+		
+4'd0:display1=8'b11111100;
+
+4'd1:display1=8'b01100000;
+
+4'd2:display1=8'b11011010;
+		
+4'd3:display1=8'b11110010;	
+		
+4'd4:display1=8'b01100110;
+	
+4'd5:display1=8'b10110110;
+	
+4'd6:display1=8'b10111110;
+	
+4'd7:display1=8'b11100000;
+
+4'd8:display1=8'b11111110;
+	
+4'd9:display1=8'b11110110;
+
+4'd10:display1=8'b11111100;
+4'd11:display1=8'b01100000;
+
+4'd12:display1=8'b11011010;
+4'd13:display1=8'b11110010;
+4'd14:display1=8'b00011100;
+		
+endcase
+	
+flag=2'b01;
+
+end
+else if(flag==2'b01)
+begin
+		
+control=4'b1011;
+	
+case (count)
+	
+4'd0:display1=8'b11111100;	
+4'd1:display1=8'b11111100;
+
+4'd2:display1=8'b11111100;
+
+4'd3:display1=8'b11111100;
+
+4'd4:display1=8'b11111100;
+		
+4'd5:display1=8'b11111100;
+	
+4'd6:display1=8'b11111100;
+
+4'd7:display1=8'b11111100;
+	
+4'd8:display1=8'b11111100;
+		
+4'd9:display1=8'b11111100;
+
+4'd10:display1=8'b01100000;
+
+4'd11:display1=8'b01100000;
+
+4'd12:display1=8'b01100000;
+
+4'd13:display1=8'b01100000;
+
+4'd14:display1=8'b00011100;
+	
+endcase
+		
+flag=2'b10;
+
+end
+	
+else if(flag==2'b10)
+
+begin
+		
+control=4'b1101;
+	
+case (count)
+	
+4'd0:display1=8'b11111100;
+
+4'd1:display1=8'b11111100;
+
+4'd2:display1=8'b11111100;
+	
+4'd3:display1=8'b11111100;
+		
+4'd4:display1=8'b11111100;
+		
+4'd5:display1=8'b11111100;
+		
+4'd6:display1=8'b11111100;
+		
+4'd7:display1=8'b11111100;
+		
+4'd8:display1=8'b11111100;
+		
+4'd9:display1=8'b11111100;
+
+4'd10:display1=8'b11111100;
+4'd11:display1=8'b11111100;
+4'd12:display1=8'b11111100;
+4'd13:display1=8'b11111100;
+4'd14:display1=8'b01111100;
+	
+endcase
+		
+flag=2'b11;
+
+end
+
+else
+	
+begin
+	
+control=4'b1110;
+
+case (count)
+
+4'd0:display1=8'b11111100;
+
+4'd1:display1=8'b11111100;
+
+4'd2:display1=8'b11111100;
+
+4'd3:display1=8'b11111100;
+
+4'd4:display1=8'b11111100;
+
+4'd5:display1=8'b11111100;
+
+4'd6:display1=8'11111100;
+
+4'd7:display1=8'11111100;
+		
+4'd8:display1=8'b11111100;
+
+4'd9:display1=8'b11111100;
+
+4'd10:display1=8'b11111100;
+4'd11:display1=8'b11111100;
+4'd12:display1=8'b11111100;
+4'd13:display1=8'b11111100;
+4'd14:display1=8'b10001110;
+	
+endcase
+		
+flag=2'b00;
+	
+end	
+
+end
+
+endmodule 
+
