@@ -1,0 +1,16 @@
+net "clk" LOC = "P55";
+net "sensor[1]" LOC = "P114";
+net "sensor[0]" LOC = "P115";
+net "control[0]" LOC = "P44";
+net "control[1]" LOC = "P45";
+net "control[2]" LOC = "P58";
+net "control[3]" LOC = "P61";
+net "display1[7]" LOC = "P7";
+net "display1[6]" LOC = "P8";
+net "display1[5]" LOC = "P9";
+net "display1[4]" LOC = "P11";
+net "display1[3]" LOC = "P10";
+net "display1[2]" LOC = "P35";
+net "display1[1]" LOC = "P41";
+net "display1[0]" LOC = "P43";
+
